@@ -11,3 +11,8 @@ out/
 *.iws
 *.iml
 *.ipr
+
+/shelf/
+/workspace.xml
+.idea/
+target/

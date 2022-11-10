@@ -14,6 +14,7 @@ public class Application {
   private static List<Integer> NUMBERS = new ArrayList<>();
   private static final Scanner scanner = new Scanner(in);
   private static int a, b, c;
+  private static boolean numberFound = false;
 
   public static void main(String[] args) {
     boolean exit = false;
@@ -23,7 +24,9 @@ public class Application {
       System.out.println("1. Input a, b, c.");
       System.out.println("2. Quick count.");
       System.out.println("3. Optimized count.");
-      System.out.println("4. Exit.");
+      // Use VM options for big numbers: -Xss1024M (1024 enough for a=5, b=7, c=10.000.000)
+      System.out.println("4. Recursive count.");
+      System.out.println("5. Exit.");
 
       System.out.print("Your choice: ");
       choice = scanner.nextInt();
@@ -52,7 +55,6 @@ public class Application {
             quickCount();
             long end = System.currentTimeMillis(); // End timer
             System.out.println("Took : " + ((end - start)) + " milliseconds");
-            NUMBERS.clear();
             System.out.println("\n\n");
           }
           break;
@@ -71,6 +73,28 @@ public class Application {
           break;
         }
         case 4: {
+          if (NUMBERS.size() == 0) {
+            System.out.println(ENTER_VALUES);
+          } else {
+            numberFound = false;
+            long start = System.currentTimeMillis(); // Start timer
+            try {
+              recursive(a, b);
+            } catch (RuntimeException e) {
+              System.out.printf(FOUND, c);
+            }
+            long end = System.currentTimeMillis(); // End timer
+
+            if (!numberFound) {
+              System.out.printf(NOT_FOUND, c);
+            }
+
+            System.out.println("Took : " + ((end - start)) + " milliseconds");
+            System.out.println("\n\n");
+          }
+          break;
+        }
+        case 5: {
           exit = true;
           break;
         }
@@ -189,5 +213,19 @@ public class Application {
         i -= 2;
       }
     }
+  }
+
+  private static void recursive(int a, int b) {
+    if (a + b == c) {
+      numberFound = true;
+      throw new RuntimeException();
+    }
+
+    if (a + b > c) {
+      return;
+    }
+
+    recursive(a + b, b);
+    recursive(a, b + a);
   }
 }

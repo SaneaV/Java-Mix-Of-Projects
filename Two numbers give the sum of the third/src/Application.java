@@ -80,12 +80,12 @@ public class Application {
             long start = System.currentTimeMillis(); // Start timer
             try {
               recursive(a, b);
-            } catch (RuntimeException e) {
+            } catch (RuntimeException e) { //Catch exception if number was found (an option to stop recursion)
               System.out.printf(FOUND, c);
             }
             long end = System.currentTimeMillis(); // End timer
 
-            if (!numberFound) {
+            if (!numberFound) { //If flag wasn't changed, the number wasn't found
               System.out.printf(NOT_FOUND, c);
             }
 
@@ -216,12 +216,12 @@ public class Application {
   }
 
   private static void recursive(int a, int b) {
-    if (a + b == c) {
-      numberFound = true;
-      throw new RuntimeException();
+    if (a + b == c) { //Stop full recursion if a + b == c
+      numberFound = true; //Flag to indicate that number was found
+      throw new RuntimeException(); //Throw exception to stop recursion
     }
 
-    if (a + b > c) {
+    if (a + b > c) { //Stop current recursion if a + b > c
       return;
     }
 

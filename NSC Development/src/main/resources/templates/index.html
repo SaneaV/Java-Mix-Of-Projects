@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+  <meta charset="UTF-8">
+  <title>List of users</title>
+  <link rel="stylesheet" th:href="@{/css/general.css}" type="text/css"/>
+</head>
+<body>
+
+<div class="mainDiv">
+  <h1>List of users</h1>
+
+  <table>
+    <thead>
+    <tr>
+      <th>Code</th>
+      <th>Username</th>
+      <th>Password</th>
+      <th>Delete</th>
+      <th>Info</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="user : ${users}">
+      <td><span th:text="${user.id}"></span></td>
+      <td><span th:text="${user.username}"></span></td>
+      <td><span th:text="hidden"></span></td>
+      <td><a th:href="@{/delete-user/{id}(id=${user.id})}">Delete</a></td>
+      <td><a th:href="@{/info-user/{id}(id=${user.id})}">Info</a></td>
+    </tr>
+    </tbody>
+  </table>
+
+  <form action="/add-user">
+    <input type="submit" value="Add User"/>
+  </form>
+
+</div>
+</body>
+</html>

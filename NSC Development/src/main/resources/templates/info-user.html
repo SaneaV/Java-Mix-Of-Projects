@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+  <meta charset="UTF-8">
+  <title>List of users</title>
+  <link rel="stylesheet" th:href="@{/css/general.css}" type="text/css"/>
+</head>
+<body>
+
+<div class="mainDiv">
+  <h1>List of users</h1>
+
+  <table>
+    <thead>
+    <tr>
+      <th>Code</th>
+      <th>Username</th>
+      <th>Password</th>
+      <th>Firstname</th>
+      <th>Lastname</th>
+      <th>Birthdate</th>
+      <th>About</th>
+      <th>Address</th>
+      <th>Update</th>
+    </tr>
+    </thead>
+    <tbody>
+      <td><span th:text="${user.id}"></span></td>
+      <td><span th:text="${user.username}"></span></td>
+      <td><span th:text="${user.password}"></span></td>
+      <td><span th:text="${user.firstName}"></span></td>
+      <td><span th:text="${user.lastName}"></span></td>
+      <td><span th:text="${#temporals.format(user.birthdate, 'dd.MM.yyyy')}"></span></td>
+      <td><span th:text="${user.about}"></span></td>
+      <td><span th:text="${user.address}"></span></td>
+      <td><a th:href="@{/update-user/{id}(id=${user.id})}">Update</a></td>
+    </tbody>
+  </table>
+
+  <form action="/">
+    <input type="submit" value="Main page"/>
+  </form>
+
+</div>
+</body>
+</html>

@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+  <meta charset="UTF-8">
+  <title>Add User</title>
+  <link rel="stylesheet" th:href="@{/css/general.css}" type="text/css"/>
+</head>
+<body>
+<div class="mainDiv">
+  <form action="#" method="post" th:action="@{/user}" th:object="${user}">
+
+    <br>
+    <label for="username">Username</label>
+    <input id="username" placeholder="Surname" th:field="*{username}" type="text">
+    <br><br>
+
+    <label for="password">Password</label>
+    <input id="password" placeholder="Password" th:field="*{password}" type="password">
+    <br><br>
+
+    <label for="firstname">Firstname</label>
+    <input id="firstname" placeholder="Firstname" th:field="*{firstName}" type="text">
+    <br><br>
+
+    <label for="lastname">Lastname</label>
+    <input id="lastname" placeholder="Lastname" th:field="*{lastName}" type="text">
+    <br><br>
+
+    <label for="birthdate">Birthdate</label>
+    <input id="birthdate" placeholder="dd-mm-yyyy" th:field="*{birthdate}" type="date" >
+    <br><br>
+
+    <label for="about">About</label>
+    <textarea id="about" placeholder="About" th:field="*{about}" ></textarea>
+    <br><br>
+
+    <label for="address">Address</label>
+    <input id="address" placeholder="Address" th:field="*{address}" type="text">
+    <br><br>
+
+    <input type="submit" value="Add User">
+  </form>
+
+  <form action="/">
+    <input type="submit" value="Main page"/>
+  </form>
+</div>
+
+</body>
+</html>

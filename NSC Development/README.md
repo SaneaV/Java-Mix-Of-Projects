@@ -33,7 +33,7 @@
 .\mvnw spring-boot:run "-Dspring-boot.run.arguments=--app.controller.type=<controller-type>"
 ```
 
-Where <controller-type> is `REST` or `UI`(by default).
+Where `<controller-type>` is `REST` or `UI`(by default).
 
 ## Functionality
 The main goal is to develop a web application that allows us to manage users (CRUD operations)

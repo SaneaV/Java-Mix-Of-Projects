@@ -1,5 +1,5 @@
-<h1>Spring Boot Kafka Tutorial</h1></p>
-<h2>How to start project</h2></p>
+<h1>Spring Boot Kafka Tutorial</h1>
+<h2>How to start the project</h2>
 <ol>
 <li class="has-line-data" data-line-start="3" data-line-end="4">Download the latest Kafka release and extract it.</li>
 <li class="has-line-data" data-line-start="4" data-line-end="11">Start the Kafka environment:

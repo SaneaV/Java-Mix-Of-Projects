@@ -6,6 +6,4 @@
 <h2>Important notes</h2>
 <p>Before closing of requestObserver or responseObserver it's necessary to wait for some time to receive a response from a server or client.<br>
 Example:<br></p>
-<code>
-Thread.sleep(100);
-</code>
+<code>Thread.sleep(100);</code>

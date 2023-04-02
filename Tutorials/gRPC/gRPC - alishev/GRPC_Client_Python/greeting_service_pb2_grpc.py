@@ -14,8 +14,23 @@ class GreetingServiceStub(object):
         Args:
             channel: A grpc.Channel.
         """
-        self.greeting = channel.unary_stream(
-                '/com.example.grpc.GreetingService/greeting',
+        self.greetingServiceNonStream = channel.unary_unary(
+                '/com.example.grpc.GreetingService/greetingServiceNonStream',
+                request_serializer=greeting__service__pb2.HelloRequest.SerializeToString,
+                response_deserializer=greeting__service__pb2.HelloResponse.FromString,
+                )
+        self.greetingServiceServerStream = channel.unary_stream(
+                '/com.example.grpc.GreetingService/greetingServiceServerStream',
+                request_serializer=greeting__service__pb2.HelloRequest.SerializeToString,
+                response_deserializer=greeting__service__pb2.HelloResponse.FromString,
+                )
+        self.greetingServiceClientStream = channel.stream_unary(
+                '/com.example.grpc.GreetingService/greetingServiceClientStream',
+                request_serializer=greeting__service__pb2.HelloRequest.SerializeToString,
+                response_deserializer=greeting__service__pb2.HelloResponse.FromString,
+                )
+        self.greetingServiceBidirectionalStream = channel.stream_stream(
+                '/com.example.grpc.GreetingService/greetingServiceBidirectionalStream',
                 request_serializer=greeting__service__pb2.HelloRequest.SerializeToString,
                 response_deserializer=greeting__service__pb2.HelloResponse.FromString,
                 )
@@ -24,7 +39,25 @@ class GreetingServiceStub(object):
 class GreetingServiceServicer(object):
     """Missing associated documentation comment in .proto file."""
 
-    def greeting(self, request, context):
+    def greetingServiceNonStream(self, request, context):
+        """Missing associated documentation comment in .proto file."""
+        context.set_code(grpc.StatusCode.UNIMPLEMENTED)
+        context.set_details('Method not implemented!')
+        raise NotImplementedError('Method not implemented!')
+
+    def greetingServiceServerStream(self, request, context):
+        """Missing associated documentation comment in .proto file."""
+        context.set_code(grpc.StatusCode.UNIMPLEMENTED)
+        context.set_details('Method not implemented!')
+        raise NotImplementedError('Method not implemented!')
+
+    def greetingServiceClientStream(self, request_iterator, context):
+        """Missing associated documentation comment in .proto file."""
+        context.set_code(grpc.StatusCode.UNIMPLEMENTED)
+        context.set_details('Method not implemented!')
+        raise NotImplementedError('Method not implemented!')
+
+    def greetingServiceBidirectionalStream(self, request_iterator, context):
         """Missing associated documentation comment in .proto file."""
         context.set_code(grpc.StatusCode.UNIMPLEMENTED)
         context.set_details('Method not implemented!')
@@ -33,8 +66,23 @@ class GreetingServiceServicer(object):
 
 def add_GreetingServiceServicer_to_server(servicer, server):
     rpc_method_handlers = {
-            'greeting': grpc.unary_stream_rpc_method_handler(
-                    servicer.greeting,
+            'greetingServiceNonStream': grpc.unary_unary_rpc_method_handler(
+                    servicer.greetingServiceNonStream,
+                    request_deserializer=greeting__service__pb2.HelloRequest.FromString,
+                    response_serializer=greeting__service__pb2.HelloResponse.SerializeToString,
+            ),
+            'greetingServiceServerStream': grpc.unary_stream_rpc_method_handler(
+                    servicer.greetingServiceServerStream,
+                    request_deserializer=greeting__service__pb2.HelloRequest.FromString,
+                    response_serializer=greeting__service__pb2.HelloResponse.SerializeToString,
+            ),
+            'greetingServiceClientStream': grpc.stream_unary_rpc_method_handler(
+                    servicer.greetingServiceClientStream,
+                    request_deserializer=greeting__service__pb2.HelloRequest.FromString,
+                    response_serializer=greeting__service__pb2.HelloResponse.SerializeToString,
+            ),
+            'greetingServiceBidirectionalStream': grpc.stream_stream_rpc_method_handler(
+                    servicer.greetingServiceBidirectionalStream,
                     request_deserializer=greeting__service__pb2.HelloRequest.FromString,
                     response_serializer=greeting__service__pb2.HelloResponse.SerializeToString,
             ),
@@ -49,7 +97,7 @@ class GreetingService(object):
     """Missing associated documentation comment in .proto file."""
 
     @staticmethod
-    def greeting(request,
+    def greetingServiceNonStream(request,
             target,
             options=(),
             channel_credentials=None,
@@ -59,7 +107,58 @@ class GreetingService(object):
             wait_for_ready=None,
             timeout=None,
             metadata=None):
-        return grpc.experimental.unary_stream(request, target, '/com.example.grpc.GreetingService/greeting',
+        return grpc.experimental.unary_unary(request, target, '/com.example.grpc.GreetingService/greetingServiceNonStream',
+            greeting__service__pb2.HelloRequest.SerializeToString,
+            greeting__service__pb2.HelloResponse.FromString,
+            options, channel_credentials,
+            insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
+
+    @staticmethod
+    def greetingServiceServerStream(request,
+            target,
+            options=(),
+            channel_credentials=None,
+            call_credentials=None,
+            insecure=False,
+            compression=None,
+            wait_for_ready=None,
+            timeout=None,
+            metadata=None):
+        return grpc.experimental.unary_stream(request, target, '/com.example.grpc.GreetingService/greetingServiceServerStream',
+            greeting__service__pb2.HelloRequest.SerializeToString,
+            greeting__service__pb2.HelloResponse.FromString,
+            options, channel_credentials,
+            insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
+
+    @staticmethod
+    def greetingServiceClientStream(request_iterator,
+            target,
+            options=(),
+            channel_credentials=None,
+            call_credentials=None,
+            insecure=False,
+            compression=None,
+            wait_for_ready=None,
+            timeout=None,
+            metadata=None):
+        return grpc.experimental.stream_unary(request_iterator, target, '/com.example.grpc.GreetingService/greetingServiceClientStream',
+            greeting__service__pb2.HelloRequest.SerializeToString,
+            greeting__service__pb2.HelloResponse.FromString,
+            options, channel_credentials,
+            insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
+
+    @staticmethod
+    def greetingServiceBidirectionalStream(request_iterator,
+            target,
+            options=(),
+            channel_credentials=None,
+            call_credentials=None,
+            insecure=False,
+            compression=None,
+            wait_for_ready=None,
+            timeout=None,
+            metadata=None):
+        return grpc.experimental.stream_stream(request_iterator, target, '/com.example.grpc.GreetingService/greetingServiceBidirectionalStream',
             greeting__service__pb2.HelloRequest.SerializeToString,
             greeting__service__pb2.HelloResponse.FromString,
             options, channel_credentials,

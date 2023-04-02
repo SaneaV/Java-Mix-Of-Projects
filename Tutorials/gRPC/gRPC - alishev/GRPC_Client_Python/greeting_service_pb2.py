@@ -13,7 +13,7 @@ _sym_db = _symbol_database.Default()
 
 
 
-DESCRIPTOR = _descriptor_pool.Default().AddSerializedFile(b'\n\x16greeting_service.proto\x12\x10\x63om.example.grpc\"-\n\x0cHelloRequest\x12\x0c\n\x04name\x18\x01 \x01(\t\x12\x0f\n\x07hobbies\x18\x02 \x03(\t\"!\n\rHelloResponse\x12\x10\n\x08greeting\x18\x01 \x01(\t2`\n\x0fGreetingService\x12M\n\x08greeting\x12\x1e.com.example.grpc.HelloRequest\x1a\x1f.com.example.grpc.HelloResponse0\x01\x62\x06proto3')
+DESCRIPTOR = _descriptor_pool.Default().AddSerializedFile(b'\n\x16greeting_service.proto\x12\x10\x63om.example.grpc\"-\n\x0cHelloRequest\x12\x0c\n\x04name\x18\x01 \x01(\t\x12\x0f\n\x07hobbies\x18\x02 \x03(\t\"!\n\rHelloResponse\x12\x10\n\x08greeting\x18\x01 \x01(\t2\x9d\x03\n\x0fGreetingService\x12[\n\x18greetingServiceNonStream\x12\x1e.com.example.grpc.HelloRequest\x1a\x1f.com.example.grpc.HelloResponse\x12`\n\x1bgreetingServiceServerStream\x12\x1e.com.example.grpc.HelloRequest\x1a\x1f.com.example.grpc.HelloResponse0\x01\x12`\n\x1bgreetingServiceClientStream\x12\x1e.com.example.grpc.HelloRequest\x1a\x1f.com.example.grpc.HelloResponse(\x01\x12i\n\"greetingServiceBidirectionalStream\x12\x1e.com.example.grpc.HelloRequest\x1a\x1f.com.example.grpc.HelloResponse(\x01\x30\x01\x62\x06proto3')
 
 _builder.BuildMessageAndEnumDescriptors(DESCRIPTOR, globals())
 _builder.BuildTopDescriptorsAndMessages(DESCRIPTOR, 'greeting_service_pb2', globals())
@@ -24,6 +24,6 @@ if _descriptor._USE_C_DESCRIPTORS == False:
   _HELLOREQUEST._serialized_end=89
   _HELLORESPONSE._serialized_start=91
   _HELLORESPONSE._serialized_end=124
-  _GREETINGSERVICE._serialized_start=126
-  _GREETINGSERVICE._serialized_end=222
+  _GREETINGSERVICE._serialized_start=127
+  _GREETINGSERVICE._serialized_end=540
 # @@protoc_insertion_point(module_scope)

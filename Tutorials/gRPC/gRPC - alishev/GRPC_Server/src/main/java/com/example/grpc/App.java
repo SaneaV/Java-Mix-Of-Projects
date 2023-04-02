@@ -4,9 +4,6 @@ import io.grpc.Server;
 import io.grpc.ServerBuilder;
 import java.io.IOException;
 
-/**
- * Hello world!
- */
 public class App {
 
   public static void main(String[] args) throws IOException, InterruptedException {

@@ -11,12 +11,8 @@ message HelloResponse {
 }
 
 service GreetingService {
-  //  Single response
-  //  rpc greeting(HelloRequest) returns (HelloResponse);
-
-  //  `stream` keyword allows to use data stream (one direction)
-  rpc greeting(HelloRequest) returns (stream HelloResponse);
-
-  //  `stream` keyword allows to use data stream (bidirectional)
-  //  rpc greeting(stream HelloRequest) returns (stream HelloResponse);
+  rpc greetingServiceNonStream(HelloRequest) returns (HelloResponse);
+  rpc greetingServiceServerStream(HelloRequest) returns (stream HelloResponse);
+  rpc greetingServiceClientStream(stream HelloRequest) returns (HelloResponse);
+  rpc greetingServiceBidirectionalStream(stream HelloRequest) returns (stream HelloResponse);
 }

@@ -11,5 +11,8 @@ message HelloResponse {
 }
 
 service GreetingService {
-  rpc greeting(HelloRequest) returns (stream HelloResponse);
+  rpc greetingServiceNonStream(HelloRequest) returns (HelloResponse);
+  rpc greetingServiceServerStream(HelloRequest) returns (stream HelloResponse);
+  rpc greetingServiceClientStream(stream HelloRequest) returns (HelloResponse);
+  rpc greetingServiceBidirectionalStream(stream HelloRequest) returns (stream HelloResponse);
 }

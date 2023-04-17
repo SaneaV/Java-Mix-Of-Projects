@@ -1,0 +1,6 @@
+FROM bellsoft/liberica-openjdk-alpine-musl:11.0.3
+ENV PROJECT_ROOT /usr/src/app
+WORKDIR $PROJECT_ROOT
+EXPOSE 8090
+ADD target/SqlApp.jar SqlApp.jar
+CMD java -jar ./SqlApp.jar

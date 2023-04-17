@@ -1,0 +1,19 @@
+version: '3.3'
+
+services:
+  postgres:
+    environment:
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=password
+    build:
+      dockerfile: Dockerfile.postgres
+    command: postgres
+    ports:
+      - "5432:5432"
+  app:
+    build:
+      dockerfile: Dockerfile.app
+    command: java -jar ./SqlApp.jar
+    network_mode: host
+    depends_on:
+      - postgres

@@ -1,0 +1,82 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+
+    <groupId>org.example</groupId>
+    <artifactId>Docker-OTUS</artifactId>
+    <version>1.0-SNAPSHOT</version>
+    <packaging>jar</packaging>
+
+    <name>Docker-OTUS</name>
+    <url>http://maven.apache.org</url>
+
+    <properties>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <maven.compiler.source>11</maven.compiler.source>
+        <maven.compiler.target>11</maven.compiler.target>
+    </properties>
+
+    <build>
+        <finalName>DockerTutorial</finalName>
+        <plugins>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-shade-plugin</artifactId>
+                <version>3.1.1</version>
+                <executions>
+                    <execution>
+                        <phase>package</phase>
+                        <goals>
+                            <goal>shade</goal>
+                        </goals>
+                        <configuration>
+                            <transformers>
+                                <transformer
+                                        implementation="org.apache.maven.plugins.shade.resource.ManifestResourceTransformer">
+                                    <mainClass>org.example.DockerApp</mainClass>
+                                </transformer>
+                            </transformers>
+                        </configuration>
+                    </execution>
+                </executions>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-antrun-plugin</artifactId>
+                <version>1.8</version>
+                <executions>
+                    <execution>
+                        <id>Build Docker image</id>
+                        <phase>package</phase>
+                        <goals>
+                            <goal>run</goal>
+                        </goals>
+                        <configuration>
+                            <target>
+
+                                <copy todir="${basedir}/target" overwrite="true">
+                                    <fileset dir="${basedir}/docker/openjdk-alpine"/>
+                                </copy>
+                                <chmod file="${basedir}/target/build.sh" perm="a+x"/>
+                                <exec dir="${basedir}/target" executable="${basedir}/target/build.bat"/>
+
+                                <copy todir="${basedir}/target" overwrite="true">
+                                    <fileset dir="${basedir}/docker/openjdk-alpine-musl"/>
+                                </copy>
+                                <chmod file="${basedir}/target/build.bat" perm="a+x"/>
+                                <exec dir="${basedir}/target" executable="${basedir}/target/build.bat"/>
+
+                                <copy todir="${basedir}/target" overwrite="true">
+                                    <fileset dir="${basedir}/docker/openjdk-centos"/>
+                                </copy>
+                                <chmod file="${basedir}/target/build.bat" perm="a+x"/>
+                                <exec dir="${basedir}/target" executable="${basedir}/target/build.bat"/>
+
+                            </target>
+                        </configuration>
+                    </execution>
+                </executions>
+            </plugin>
+        </plugins>
+    </build>
+</project>

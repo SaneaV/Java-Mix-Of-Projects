@@ -1,0 +1,43 @@
+# Base image for current dockerfile
+FROM ubuntu:22.04
+
+# Additional information about dockerfile (docker image inspect <image>)
+LABEL author=Alexandr
+LABEL type=demo
+LABEL platform=Windows
+
+# Install required set of programs
+RUN apt-get update
+# RUN apt-get install maven -y
+RUN apt-get install nginx -y
+
+# Remove temp files
+RUN apt-get clean && rm -rf /var/lib/apt/lists/*
+
+# Start command for current dockerfile (mutable from docker run)
+# CMD echo "Hello my first Docker"
+
+# Entrypoint (immutable)
+# ENTRYPOINT echo "Hello my first Docker with Entrypoint"
+
+# Start command with entry parameters (mutable from docker run)
+# CMD ["echo","Hello my first docker with parameters"]
+# CMD ["mvn","-v"]
+
+# Start execution with specified working directory
+WORKDIR /var/www/html/
+
+# Always copy index.html to working directory
+# I use "." because WORKDIR is pointing to the required folder
+COPY Files/HTML/index.html .
+
+# Environment variables
+ENV OWNER=RomNero
+ENV TYPE=demo
+
+# Ports for this dockerfile
+EXPOSE 80
+EXPOSE 443/tcp
+
+# docker run --rm -d -p80:80 <container>
+CMD ["nginx","-g","daemon off;"]

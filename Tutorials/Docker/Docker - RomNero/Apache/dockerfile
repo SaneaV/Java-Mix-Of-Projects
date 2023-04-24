@@ -1,0 +1,14 @@
+# Base image for current dockerfile
+FROM ubuntu
+
+# Additional information about dockerfile (docker image inspect <image>)
+LABEL author=Alexandr
+
+# Install required set of programs
+RUN apt-get update && apt-get install apache2 -y
+
+# Ports for this dockerfile
+EXPOSE 80
+
+# docker run --rm -d -p80:80 <container>
+CMD ["apache2ctl","-D","FOREGROUND"]

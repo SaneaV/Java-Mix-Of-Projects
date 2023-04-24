@@ -1,0 +1,8 @@
+# Base image for current dockerfile
+FROM ubuntu:22.04
+
+ENV OWNER=RomNero
+
+RUN echo $OWNER > /opt/info
+
+CMD ["cat","/opt/info"]

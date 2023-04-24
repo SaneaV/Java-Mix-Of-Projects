@@ -1,0 +1,21 @@
+# Base image for current dockerfile
+FROM ubuntu:22.04
+
+# Install required set of programs
+RUN apt-get update && apt-get install nginx -y 
+RUN apt-get clean && rm -rf /var/lib/apt/lists/*
+
+WORKDIR /var/www/html
+
+COPY index.html .
+COPY script.sh /opt/script.sh
+
+RUN chmod +x /opt/script.sh
+
+ENV OWNER=RomNero
+ENV TYPE=demo
+
+# Ports for this dockerfile
+EXPOSE 80
+
+CMD ["/opt/script.sh"]

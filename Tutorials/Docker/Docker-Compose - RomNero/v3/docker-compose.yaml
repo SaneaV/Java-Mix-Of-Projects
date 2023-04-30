@@ -1,0 +1,12 @@
+# docker run -p 5005:5005 -v /path/to/data:/app/data -e PASSWORD=flame_password flame
+version: '3.5'
+services:
+  flame:
+    image: pawelmalak/flame
+    container_name: flame
+    volumes:
+      - '/mnt/e/Programming/Java projects/Tutorials/Docker/Docker-Compose - RomNero/v3/data:/app/data'
+    environment:
+      - 'PASSWORD=pass'
+    ports:
+      - '5005:5005'

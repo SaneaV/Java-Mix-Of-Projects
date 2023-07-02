@@ -19,5 +19,5 @@ to extract get/set methods. Execution time ~ is the same for both methods.
 
 ## Used libraries
 `lombok` - to generate get and set methods.<br>
-`jacoco` - to generate test reports (run `mvn clean verify` to generate `target/site/index.html`). 
+`jacoco` - to generate test reports (run `mvn clean verify` to generate `target/site/index.html`). <br>
 `junit` - used for basic test purposes.

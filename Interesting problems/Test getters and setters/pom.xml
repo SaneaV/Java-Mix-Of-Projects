@@ -4,15 +4,26 @@
 
   <groupId>org.example</groupId>
   <artifactId>test-get-set</artifactId>
-  <version>1.0-SNAPSHOT</version>
+  <version>1.0</version>
   <packaging>jar</packaging>
 
   <name>test-get-set</name>
   <url>http://maven.apache.org</url>
 
   <properties>
-    <maven.compiler.source>1.8</maven.compiler.source>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+
+    <!--MAVEN PROPERTIES-->
+    <maven.compiler.source>1.8</maven.compiler.source>
+    <maven.compiler.plugin.version>3.11.0</maven.compiler.plugin.version>
+    <maven.surefire.plugin.version>3.1.2</maven.surefire.plugin.version>
+
+    <!--TOOLS PROPERTIES-->
+    <lombok.version>1.18.28</lombok.version>
+
+    <!--TEST PROPERTIES-->
+    <jacoco.maven.plugin.version>0.8.10</jacoco.maven.plugin.version>
+    <junit.jupiter.version>5.9.3</junit.jupiter.version>
   </properties>
 
   <dependencies>
@@ -20,20 +31,15 @@
     <dependency>
       <groupId>org.projectlombok</groupId>
       <artifactId>lombok</artifactId>
-      <version>1.18.28</version>
+      <version>${lombok.version}</version>
       <scope>provided</scope>
     </dependency>
 
     <!--TEST-->
     <dependency>
-      <groupId>org.springframework.boot</groupId>
-      <artifactId>spring-boot-starter-test</artifactId>
-      <version>2.7.13</version>
-    </dependency>
-    <dependency>
       <groupId>org.junit.jupiter</groupId>
       <artifactId>junit-jupiter-params</artifactId>
-      <version>5.9.3</version>
+      <version>${junit.jupiter.version}</version>
       <scope>test</scope>
       <exclusions>
         <exclusion>
@@ -45,13 +51,7 @@
     <dependency>
       <groupId>org.junit.jupiter</groupId>
       <artifactId>junit-jupiter-engine</artifactId>
-      <version>5.9.3</version>
-      <scope>test</scope>
-    </dependency>
-    <dependency>
-      <groupId>org.assertj</groupId>
-      <artifactId>assertj-core</artifactId>
-      <version>3.24.2</version>
+      <version>${junit.jupiter.version}</version>
       <scope>test</scope>
     </dependency>
 
@@ -59,64 +59,45 @@
     <dependency>
       <groupId>org.jacoco</groupId>
       <artifactId>jacoco-maven-plugin</artifactId>
-      <version>0.8.10</version>
+      <version>${jacoco.maven.plugin.version}</version>
     </dependency>
-
   </dependencies>
 
   <build>
-    <testSourceDirectory>${project.basedir}/src/test/java</testSourceDirectory>
-
-    <pluginManagement>
-      <plugins>
-        <plugin>
-          <artifactId>maven-deploy-plugin</artifactId>
-        </plugin>
-      </plugins>
-    </pluginManagement>
-
     <plugins>
       <plugin>
         <groupId>org.apache.maven.plugins</groupId>
         <artifactId>maven-compiler-plugin</artifactId>
-        <version>3.11.0</version>
+        <version>${maven.compiler.plugin.version}</version>
         <configuration>
-          <source>1.8</source>
-          <target>1.8</target>
-          <annotationProcessorPaths>
-            <path>
-              <groupId>org.projectlombok</groupId>
-              <artifactId>lombok</artifactId>
-              <version>1.18.28</version>
-            </path>
-          </annotationProcessorPaths>
+          <source>${maven.compiler.source}</source>
+          <target>${maven.compiler.source}</target>
         </configuration>
       </plugin>
 
       <plugin>
         <groupId>org.apache.maven.plugins</groupId>
         <artifactId>maven-surefire-plugin</artifactId>
-        <version>3.1.2</version>
+        <version>${maven.surefire.plugin.version}</version>
       </plugin>
 
-            <plugin>
-              <groupId>org.jacoco</groupId>
-              <artifactId>jacoco-maven-plugin</artifactId>
-              <version>0.8.10</version>
-              <executions>
-                <execution>
-                  <goals>
-                    <goal>prepare-agent</goal>
-                  </goals>
-                </execution>
-                <execution>
-                  <id>report</id>
-                  <goals>
-                    <goal>report</goal>
-                  </goals>
-                </execution>
-              </executions>
-            </plugin>
+      <plugin>
+        <groupId>org.jacoco</groupId>
+        <artifactId>jacoco-maven-plugin</artifactId>
+        <executions>
+          <execution>
+            <goals>
+              <goal>prepare-agent</goal>
+            </goals>
+          </execution>
+          <execution>
+            <id>report</id>
+            <goals>
+              <goal>report</goal>
+            </goals>
+          </execution>
+        </executions>
+      </plugin>
     </plugins>
   </build>
 

@@ -2,8 +2,8 @@ package org.example.domain;
 
 import static java.lang.Boolean.FALSE;
 import static java.util.Collections.singleton;
-import static org.assertj.core.api.Assertions.assertThat;
-import static org.springframework.util.StringUtils.capitalize;
+import static junit.framework.Assert.assertEquals;
+import static org.codehaus.plexus.util.StringUtils.capitalise;
 
 import java.lang.reflect.Field;
 import java.lang.reflect.InvocationTargetException;
@@ -194,14 +194,14 @@ public abstract class GetterSetterTest {
       }
       // Filter setter method (set keyword + first big letter + parameter type)
       final Method setter = instance.getClass()
-          .getDeclaredMethod(SET_KEYWORD + capitalize(field.getName()), field.getType());
+          .getDeclaredMethod(SET_KEYWORD + capitalise(field.getName()), field.getType());
 
       // Filter getter method base on "get" or "is" first keyword
       Method getter;
       if (field.getType() == boolean.class) {
-        getter = instance.getClass().getDeclaredMethod(IS_KEYWORD + capitalize(field.getName()));
+        getter = instance.getClass().getDeclaredMethod(IS_KEYWORD + capitalise(field.getName()));
       } else {
-        getter = instance.getClass().getDeclaredMethod(GET_KEYWORD + capitalize(field.getName()));
+        getter = instance.getClass().getDeclaredMethod(GET_KEYWORD + capitalise(field.getName()));
       }
 
       // Skip ignored method
@@ -241,7 +241,7 @@ public abstract class GetterSetterTest {
   private <T> void callGetter(Method getter, T instance, Object expected)
       throws InvocationTargetException, IllegalAccessException {
     // Check if getter returned expected value
-    final Object getResult = getter.invoke(instance);
-    assertThat(getResult).isEqualTo(expected);
+    final Object actual = getter.invoke(instance);
+    assertEquals(expected, actual);
   }
 }

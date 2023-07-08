@@ -18,7 +18,7 @@ performing of messaging operations. The client is intended to be used for writin
 1. Pull docker image `docker pull abh1sh3k/apache-qpid`
 2. Run docker container `docker run -d -p 8080:8080 -p 5672:5672 --restart=unless-stopped --name=qpidbrokerj-7.1.3 
    abh1sh3k/apache-qpid:latest`
-3. Go to the `http://localhost:18080/`
+3. Go to the `http://localhost:8080/`
 4. Enter into account with credentials login (for admin role: `admin:admin`, for guest role: `guest:guest`)
 
 ### Setup Messaging Client

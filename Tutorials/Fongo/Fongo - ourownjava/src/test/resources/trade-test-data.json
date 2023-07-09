@@ -1,0 +1,10 @@
+{
+  "trade": [
+    {
+      "id": "00001",
+      "traderId": "A005",
+      "value": 90.3,
+      "exchangeCode": "NYSE"
+    }
+  ]
+}
